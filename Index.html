@@ -1,0 +1,176 @@
+from pathlib import Path
+
+html = r'''<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0b16">
+<title>FocusForge — Study smarter</title>
+<style>
+:root{--bg:#0b0b16;--panel:#151526;--panel2:#1b1b30;--line:#2a2943;--text:#f5f4ff;--muted:#a6a4c4;--purple:#a78bfa;--mint:#72f2c4;--pink:#ff8eb4;--yellow:#ffd479;--danger:#ff7e89}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#201a3b 0,#0b0b16 52%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer}.app{max-width:920px;margin:auto;padding:18px 14px 100px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:4px 0 20px}.brand{display:flex;align-items:center;gap:10px}.logo{width:43px;height:43px;border-radius:15px;background:linear-gradient(135deg,#a78bfa,#72f2c4);display:grid;place-items:center;color:#111126;font-weight:1000;font-size:22px;box-shadow:0 8px 28px #a78bfa25}.brand h1{font-size:20px;margin:0;letter-spacing:-.5px}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px}.pill{border:1px solid var(--line);border-radius:99px;padding:8px 11px;color:var(--mint);font-size:12px;background:#151526}.hero{border:1px solid #383056;background:linear-gradient(130deg,#211a3d,#17182c 65%,#142c30);padding:22px;border-radius:25px;position:relative;overflow:hidden}.eyebrow{color:var(--mint);font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1.7px}.hero h2{font-size:clamp(25px,6vw,38px);line-height:1.08;letter-spacing:-1px;margin:10px 0}.hero p{color:#c3c0de;max-width:440px;font-size:14px;line-height:1.55;margin:0 0 17px}.btn{border:0;border-radius:13px;padding:12px 15px;font-weight:800;background:var(--purple);color:#151126}.btn.secondary{background:#25243d;color:var(--text);border:1px solid var(--line)}.btn.mint{background:var(--mint);color:#092019}.btn.danger{background:#3a202e;color:#ffb6c4;border:1px solid #663344}.btn.small{padding:8px 10px;font-size:12px;border-radius:10px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 22px}.stat,.card{background:linear-gradient(145deg,#171729,#131322);border:1px solid var(--line);border-radius:19px;padding:15px}.stat .ico{font-size:19px}.stat strong{display:block;font-size:22px;margin:8px 0 2px}.stat span{font-size:11px;color:var(--muted)}.section-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:23px 2px 12px}.section-head h3{font-size:17px;margin:0}.section-head small{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile{min-height:130px;text-align:left;border:1px solid var(--line);border-radius:19px;padding:16px;background:linear-gradient(145deg,#1b1a31,#131321);color:var(--text)}.tile .tile-icon{font-size:24px}.tile h4{margin:13px 0 4px;font-size:15px}.tile p{margin:0;color:var(--muted);font-size:12px;line-height:1.45}.quote{margin-top:15px;border-left:3px solid var(--mint);padding:12px 14px;background:#142323a8;border-radius:0 14px 14px 0;color:#d9fff2;font-size:13px;line-height:1.5}.tabs{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#0c0c18ed;backdrop-filter:blur(16px);border-top:1px solid #29283f;display:flex;justify-content:center;padding:9px max(8px,env(safe-area-inset-left)) calc(9px + env(safe-area-inset-bottom));gap:4px}.tabs button{flex:1;max-width:180px;background:transparent;color:var(--muted);border:0;border-radius:13px;padding:9px 4px;font-size:11px;font-weight:700}.tabs button span{display:block;font-size:19px;margin-bottom:3px}.tabs button.active{background:#282442;color:var(--mint)}.page{display:none}.page.active{display:block;animation:fade .2s ease}@keyframes fade{from{opacity:.5;transform:translateY(4px)}to{opacity:1;transform:none}}.row{display:flex;align-items:center;justify-content:space-between;gap:10px}.muted{color:var(--muted)}.formrow{display:flex;gap:8px;flex-wrap:wrap}.field{width:100%;background:#0f0f1d;color:var(--text);border:1px solid var(--line);border-radius:12px;padding:12px;outline:none}.field:focus{border-color:var(--purple)}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.label{font-size:12px;color:var(--muted);display:block;margin:0 0 6px}.formgroup{min-width:0}.subject{margin:10px 0;background:#171729;border:1px solid var(--line);border-radius:17px;padding:14px}.subject h4{margin:0;font-size:15px}.subject .meta{font-size:11px;color:var(--muted);margin-top:4px}.progress{height:7px;background:#2a2943;border-radius:9px;overflow:hidden;margin:12px 0}.progress div{height:100%;background:linear-gradient(90deg,var(--purple),var(--mint));border-radius:9px}.chapter{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #2a2943}.chapter input{accent-color:var(--mint);width:18px;height:18px}.chapter span{flex:1;font-size:13px}.chapter.done span{text-decoration:line-through;color:var(--muted)}.timerbox{text-align:center;padding:24px 14px}.timer-ring{width:min(70vw,270px);height:min(70vw,270px);border-radius:50%;border:7px solid #292641;border-top-color:var(--mint);margin:15px auto 20px;display:flex;align-items:center;justify-content:center;flex-direction:column;box-shadow:0 0 45px #a78bfa10}.timer-ring.running{animation:glow 3s ease-in-out infinite}.timer-time{font-size:clamp(43px,12vw,65px);font-weight:850;letter-spacing:-2px;font-variant-numeric:tabular-nums}.timer-caption{font-size:12px;color:var(--muted)}@keyframes glow{50%{box-shadow:0 0 38px #72f2c433;border-color:#72f2c4}}.presets{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:12px 0 20px}.preset{background:#1c1b31;border:1px solid var(--line);color:var(--text);padding:9px 12px;border-radius:99px;font-size:12px}.preset.selected{background:#332b51;border-color:var(--purple);color:#e5d9ff}.task{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);background:#171729;padding:12px;border-radius:14px;margin:8px 0}.task input{margin-top:4px;accent-color:var(--mint);width:17px;height:17px}.taskmain{flex:1;min-width:0}.taskmain strong{font-size:13px;display:block;overflow-wrap:anywhere}.taskmain small{color:var(--muted);font-size:11px;display:block;margin-top:4px}.task.completed strong{text-decoration:line-through;color:var(--muted)}.empty{text-align:center;padding:28px 12px;color:var(--muted);font-size:13px}.divider{height:1px;background:var(--line);margin:14px 0}.footer{text-align:center;color:#777591;font-size:11px;margin:25px 0 0}.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:20;background:var(--mint);color:#0b201a;border-radius:99px;padding:11px 16px;font-size:13px;font-weight:800;display:none;box-shadow:0 8px 30px #0005}.warning{background:#30261a;border:1px solid #59472b;color:#ffdfa2;padding:12px;border-radius:13px;font-size:12px;line-height:1.5;margin-top:12px}
+@media(min-width:700px){.app{padding:25px 22px 110px}.hero{padding:30px}.dashboard-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.stats{margin-top:14px}.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.tile{min-height:150px}}
+@media(max-width:380px){.stats{gap:7px}.stat{padding:11px}.stat strong{font-size:19px}.hero{padding:18px}.formgrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="toast" id="toast"></div>
+<main class="app">
+<header class="top">
+  <div class="brand"><div class="logo">F</div><div><h1 id="brandName">FocusForge</h1><p>Your study space. Your progress.</p></div></div>
+  <button class="pill" id="streakPill" onclick="showPage('home')">🔥 <span id="topStreak">0 day streak</span></button>
+</header>
+
+<section class="page active" id="page-home">
+  <div class="hero">
+    <div class="eyebrow">Small steps. Big results.</div>
+    <h2>Make today<br>count.</h2>
+    <p id="greeting">One focused session at a time. Show up for your future self.</p>
+    <button class="btn mint" onclick="showPage('focus')">▶ Start focusing</button>
+    <div class="quote" id="quote">“The secret of getting ahead is getting started.”</div>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="ico">🔥</div><strong id="streakStat">0</strong><span>DAY STREAK</span></div>
+    <div class="stat"><div class="ico">📚</div><strong id="doneStat">0/0</strong><span>CHAPTERS DONE</span></div>
+    <div class="stat"><div class="ico">⏱️</div><strong id="minutesStat">0m</strong><span>STUDY TIME TODAY</span></div>
+  </div>
+  <div class="section-head"><h3>Your study tools</h3><small>Choose a space</small></div>
+  <div class="grid">
+    <button class="tile" onclick="showPage('subjects')"><div class="tile-icon">📘</div><h4>Subject tracker</h4><p>Mark chapters done and see what's left.</p></button>
+    <button class="tile" onclick="showPage('planner')"><div class="tile-icon">🗓️</div><h4>Timetable & backlog</h4><p>Plan study tasks and due dates.</p></button>
+    <button class="tile" onclick="showPage('focus')"><div class="tile-icon">🎯</div><h4>Focus timer</h4><p>Work in focused blocks, one task at a time.</p></button>
+    <button class="tile" onclick="showPage('progress')"><div class="tile-icon">📈</div><h4>My progress</h4><p>Review sessions and completed work.</p></button>
+  </div>
+  <div class="footer">Built for your next level • <span id="footerName">Yos salun ki</span></div>
+</section>
+
+<section class="page" id="page-subjects">
+  <div class="section-head"><h3>📚 Subject tracker</h3><small id="subjectCount">0 subjects</small></div>
+  <div class="card">
+    <div class="formgrid">
+      <div class="formgroup"><label class="label" for="subjectName">Subject name</label><input class="field" id="subjectName" placeholder="e.g. Physics" maxlength="40"></div>
+      <div class="formgroup"><label class="label" for="chaptersInput">Chapters (one per line)</label><textarea class="field" id="chaptersInput" rows="2" placeholder="Rotational Dynamics&#10;Oscillations"></textarea></div>
+    </div>
+    <button class="btn" style="margin-top:10px;width:100%" onclick="addSubject()">+ Add subject</button>
+    <p class="muted" style="font-size:11px;margin-bottom:0">You can add chapters later, too. Your progress saves on this device.</p>
+  </div>
+  <div id="subjectsList"></div>
+  <div class="empty" id="subjectsEmpty">Add your first subject above to get started.</div>
+</section>
+
+<section class="page" id="page-focus">
+  <div class="section-head"><h3>🎯 Focus mode</h3><small>One thing at a time</small></div>
+  <div class="card timerbox">
+    <div class="eyebrow">FOCUS SESSION</div>
+    <div class="timer-ring" id="timerRing"><div class="timer-time" id="timerDisplay">25:00</div><div class="timer-caption" id="timerCaption">Ready when you are</div></div>
+    <div class="presets" id="presets">
+      <button class="preset selected" data-min="25" onclick="choosePreset(25)">25 min</button>
+      <button class="preset" data-min="30" onclick="choosePreset(30)">30 min</button>
+      <button class="preset" data-min="45" onclick="choosePreset(45)">45 min</button>
+      <button class="preset" data-min="60" onclick="choosePreset(60)">60 min</button>
+      <button class="preset" data-min="90" onclick="choosePreset(90)">90 min</button>
+      <button class="preset" data-min="120" onclick="choosePreset(120)">120 min</button>
+    </div>
+    <div class="formgroup" style="text-align:left;max-width:440px;margin:0 auto 12px"><label class="label" for="focusTask">What will you study?</label><input class="field" id="focusTask" placeholder="e.g. Physics — Rotational Dynamics"></div>
+    <div class="formrow" style="justify-content:center"><button class="btn mint" id="startPauseBtn" onclick="toggleTimer()">▶ Start session</button><button class="btn secondary" onclick="resetTimer()">↻ Reset</button></div>
+    <div class="warning">Keep FocusForge open during your session for the timer to run reliably. This web version cannot force-block other Android apps; real app blocking needs a native Android build and special permissions.</div>
+  </div>
+  <div class="card" style="margin-top:12px"><div class="row"><strong>Today's focus</strong><span class="muted" id="todayFocus">0 minutes</span></div><div class="progress"><div id="focusProgress" style="width:0%"></div></div><small class="muted">Goal: 120 minutes per day</small></div>
+</section>
+
+<section class="page" id="page-planner">
+  <div class="section-head"><h3>🗓️ Timetable & backlog</h3><small>Plan it. Finish it.</small></div>
+  <div class="card">
+    <div class="formgrid">
+      <div class="formgroup"><label class="label" for="taskTitle">Task / chapter</label><input class="field" id="taskTitle" placeholder="e.g. Revise Electrostatics" maxlength="100"></div>
+      <div class="formgroup"><label class="label" for="taskSubject">Subject</label><input class="field" id="taskSubject" placeholder="e.g. Physics" maxlength="40"></div>
+      <div class="formgroup"><label class="label" for="taskDate">Due date</label><input class="field" id="taskDate" type="date"></div>
+      <div class="formgroup"><label class="label" for="taskTime">Time (optional)</label><input class="field" id="taskTime" type="time"></div>
+    </div>
+    <button class="btn" style="margin-top:10px;width:100%" onclick="addTask()">+ Add to planner</button>
+  </div>
+  <div class="section-head"><h3>Pending & upcoming</h3><small id="pendingCount">0 tasks</small></div>
+  <div id="tasksList"></div><div class="empty" id="tasksEmpty">No tasks yet. Add a chapter or homework above.</div>
+  <div class="section-head"><h3>Completed</h3></div><div id="completedTasks"></div>
+</section>
+
+<section class="page" id="page-progress">
+  <div class="section-head"><h3>📈 My progress</h3><small>Every session counts</small></div>
+  <div class="stats">
+    <div class="stat"><div class="ico">⏱️</div><strong id="allMinutes">0m</strong><span>TOTAL FOCUS</span></div>
+    <div class="stat"><div class="ico">✅</div><strong id="allTasksDone">0</strong><span>TASKS DONE</span></div>
+    <div class="stat"><div class="ico">📘</div><strong id="allChaptersDone">0</strong><span>CHAPTERS DONE</span></div>
+  </div>
+  <div class="card"><div class="row"><strong>Daily focus goal</strong><strong id="goalText">0 / 120 min</strong></div><div class="progress"><div id="goalProgress" style="width:0%"></div></div><p class="muted" style="font-size:12px">Aim for consistency, not perfection. Your streak grows on days when you complete at least one focus session.</p></div>
+  <div class="section-head"><h3>Recent focus sessions</h3><button class="btn secondary small" onclick="clearSessions()">Clear history</button></div>
+  <div id="sessionsList"></div><div class="empty" id="sessionsEmpty">Your completed focus sessions will appear here.</div>
+  <div class="section-head"><h3>Personalize</h3></div>
+  <div class="card">
+    <div class="formgrid">
+      <div class="formgroup"><label class="label" for="appNameInput">App title</label><input class="field" id="appNameInput" value="FocusForge" maxlength="35"></div>
+      <div class="formgroup"><label class="label" for="footerInput">Footer text</label><input class="field" id="footerInput" value="Yos salun ki" maxlength="40"></div>
+    </div>
+    <button class="btn" style="margin-top:10px" onclick="saveSettings()">Save appearance</button>
+    <button class="btn danger small" style="float:right;margin-top:10px" onclick="resetAll()">Reset all app data</button>
+    <div style="clear:both"></div>
+  </div>
+</section>
+</main>
+<nav class="tabs">
+  <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span>Home</button>
+  <button data-page="subjects" onclick="showPage('subjects')"><span>📚</span>Subjects</button>
+  <button data-page="focus" onclick="showPage('focus')"><span>🎯</span>Focus</button>
+  <button data-page="planner" onclick="showPage('planner')"><span>🗓️</span>Planner</button>
+  <button data-page="progress" onclick="showPage('progress')"><span>📈</span>Progress</button>
+</nav>
+<script>
+const KEY='focusforge_v1';
+const today=()=>new Date().toLocaleDateString('en-CA');
+const dateLabel=d=>{if(!d)return 'No due date';const x=new Date(d+'T12:00:00');return x.toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'})};
+let data={subjects:[],tasks:[],sessions:[],settings:{appName:'FocusForge',footer:'Yos salun ki'}};
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'null');if(saved&&typeof saved==='object')data={...data,...saved,settings:{...data.settings,...(saved.settings||{})}}}catch(e){}
+let chosenMinutes=25,remaining=1500,timerInterval=null,running=false,sessionStartedAt=null;
+const $=id=>document.getElementById(id);
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast('Could not save on this browser.')}renderAll()}
+function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>t.style.display='none',2200)}
+function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id==='page-'+page));document.querySelectorAll('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.page===page));if(page==='focus')updateTimerDisplay();window.scrollTo({top:0,behavior:'smooth'})}
+function allChapters(){return data.subjects.reduce((n,s)=>n+s.chapters.length,0)}
+function completedChapters(){return data.subjects.reduce((n,s)=>n+s.chapters.filter(c=>c.done).length,0)}
+function totalMinutes(){return data.sessions.reduce((n,s)=>n+(s.minutes||0),0)}
+function todayMinutes(){return data.sessions.filter(s=>s.date===today()).reduce((n,s)=>n+(s.minutes||0),0)}
+function streak(){const days=[...new Set(data.sessions.map(s=>s.date))].sort().reverse();if(!days.length)return 0;let d=new Date();d.setHours(12,0,0,0);let ds=d.toLocaleDateString('en-CA');if(!days.includes(ds)){d.setDate(d.getDate()-1);ds=d.toLocaleDateString('en-CA');if(!days.includes(ds))return 0}let count=0;for(;;){const key=d.toLocaleDateString('en-CA');if(!days.includes(key))break;count++;d.setDate(d.getDate()-1)}return count}
+function renderAll(){renderHome();renderSubjects();renderTasks();renderProgress();$('brandName').textContent=data.settings.appName||'FocusForge';$('footerName').textContent=data.settings.footer||'';$('appNameInput').value=data.settings.appName||'FocusForge';$('footerInput').value=data.settings.footer||''}
+function renderHome(){$('topStreak').textContent=streak()+' day streak';$('streakStat').textContent=streak();$('doneStat').textContent=completedChapters()+'/'+allChapters();$('minutesStat').textContent=todayMinutes()+'m';$('todayFocus').textContent=todayMinutes()+' minutes';$('focusProgress').style.width=Math.min(100,todayMinutes()/120*100)+'%';const quotes=['“The secret of getting ahead is getting started.”','“Focus on progress, not perfection.”','“You do not have to be extreme, just consistent.”','“One chapter at a time. One day at a time.”'];const day=new Date().getDate();$('quote').textContent=quotes[day%quotes.length]}
+function renderSubjects(){$('subjectCount').textContent=data.subjects.length+' subjects';$('subjectsEmpty').style.display=data.subjects.length?'none':'block';$('subjectsList').innerHTML=data.subjects.map(s=>{const done=s.chapters.filter(c=>c.done).length,pc=s.chapters.length?Math.round(done/s.chapters.length*100):0;return `<div class="subject"><div class="row"><div><h4>${esc(s.name)}</h4><div class="meta">${done} of ${s.chapters.length} chapters completed</div></div><button class="btn danger small" onclick="deleteSubject('${s.id}')">Delete</button></div><div class="progress"><div style="width:${pc}%"></div></div>${s.chapters.map(c=>`<label class="chapter ${c.done?'done':''}"><input type="checkbox" ${c.done?'checked':''} onchange="toggleChapter('${s.id}','${c.id}',this.checked)"><span>${esc(c.name)}</span><button class="btn secondary small" onclick="deleteChapter('${s.id}','${c.id}')">×</button></label>`).join('')}<div class="formrow" style="margin-top:10px"><input class="field" id="newchap-${s.id}" placeholder="Add a chapter" style="flex:1;min-width:120px;padding:9px"><button class="btn secondary small" onclick="addChapter('${s.id}')">+ Chapter</button></div></div>`}).join('')}
+function renderTasks(){const pending=data.tasks.filter(t=>!t.done).sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')),done=data.tasks.filter(t=>t.done);$('pendingCount').textContent=pending.length+' tasks';$('tasksEmpty').style.display=pending.length?'none':'block';$('tasksList').innerHTML=pending.map(taskHTML).join('');$('completedTasks').innerHTML=done.map(taskHTML).join('')||'<div class="muted" style="font-size:12px;padding:8px 2px">Nothing completed yet.</div>'}
+function taskHTML(t){return `<div class="task ${t.done?'completed':''}"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${t.id}',this.checked)"><div class="taskmain"><strong>${esc(t.title)}</strong><small>${esc(t.subject||'General')} · ${dateLabel(t.date)}${t.time?' · '+t.time:''}</small></div><button class="btn danger small" onclick="deleteTask('${t.id}')">×</button></div>`}
+function renderProgress(){$('allMinutes').textContent=totalMinutes()+'m';$('allTasksDone').textContent=data.tasks.filter(t=>t.done).length;$('allChaptersDone').textContent=completedChapters();$('goalText').textContent=todayMinutes()+' / 120 min';$('goalProgress').style.width=Math.min(100,todayMinutes()/120*100)+'%';$('sessionsEmpty').style.display=data.sessions.length?'none':'block';$('sessionsList').innerHTML=[...data.sessions].reverse().slice(0,20).map(s=>`<div class="task"><div style="font-size:20px">⏱️</div><div class="taskmain"><strong>${esc(s.task||'Focus session')}</strong><small>${dateLabel(s.date)} · ${s.minutes} minutes</small></div></div>`).join('')}
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function id(){return Math.random().toString(36).slice(2,10)}
+function addSubject(){const name=$('subjectName').value.trim();if(!name){toast('Enter a subject name first.');return}const chapters=$('chaptersInput').value.split('\n').map(x=>x.trim()).filter(Boolean).map(name=>({id:id(),name,done:false}));data.subjects.push({id:id(),name,chapters});$('subjectName').value='';$('chaptersInput').value='';save();toast('Subject added!')}
+function deleteSubject(sid){if(!confirm('Delete this subject and its chapter progress?'))return;data.subjects=data.subjects.filter(s=>s.id!==sid);save()}
+function toggleChapter(sid,cid,done){const s=data.subjects.find(x=>x.id===sid),c=s&&s.chapters.find(x=>x.id===cid);if(c)c.done=done;save();if(done)toast('Chapter completed!')}
+function deleteChapter(sid,cid){const s=data.subjects.find(x=>x.id===sid);if(s)s.chapters=s.chapters.filter(c=>c.id!==cid);save()}
+function addChapter(sid){const inp=$('newchap-'+sid),name=inp.value.trim();if(!name){toast('Type a chapter name.');return}const s=data.subjects.find(x=>x.id===sid);if(s)s.chapters.push({id:id(),name,done:false});save();toast('Chapter added!')}
+function addTask(){const title=$('taskTitle').value.trim();if(!title){toast('Enter a task or chapter.');return}data.tasks.push({id:id(),title,subject:$('taskSubject').value.trim(),date:$('taskDate').value,time:$('taskTime').value,done:false});$('taskTitle').value='';$('taskSubject').value='';$('taskTime').value='';save();toast('Added to your planner!')}
+function toggleTask(tid,done){const t=data.tasks.find(x=>x.id===tid);if(t)t.done=done;save();if(done)toast('Task completed!')}
+function deleteTask(tid){data.tasks=data.tasks.filter(t=>t.id!==tid);save()}
+function choosePreset(min){if(running)return toast('Pause or reset the current timer first.');chosenMinutes=min;remaining=min*60;document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('selected',Number(b.dataset.min)===min));updateTimerDisplay()}
+function updateTimerDisplay(){$('timerDisplay').textContent=String(Math.floor(remaining/60)).padStart(2,'0')+':'+String(remaining%60).padStart(2,'0');$('timerCaption').textContent=running?'Stay with your task':'Ready when you are';$('timerRing').classList.toggle('running',running);$('startPauseBtn').textContent=running?'Ⅱ Pause session':'▶ Start session'}
+function toggleTimer(){if(running){pauseTimer();return}if(remaining<=0)remaining=chosenMinutes*60;running=true;sessionStartedAt=Date.now();updateTimerDisplay();timerInterval=setInterval(()=>{remaining--;updateTimerDisplay();if(remaining<=0)finishTimer()},1000)}
+function pauseTimer(){if(!running)return;running=false;clearInterval(timerInterval);timerInterval=null;updateTimerDisplay()}
+function resetTimer(){pauseTimer();remaining=chosenMinutes*60;updateTimerDisplay();toast('Timer reset.')}
+function finishTimer(){pauseTimer();const minutes=chosenMinutes;data.sessions.push({id:id(),date:today(),minutes,task:$('focusTask').value.trim()||'Focus session',completedAt:new Date().toISOString()});remaining=0;updateTimerDisplay();save();toast('Session complete — great work!');if('vibrate'in navigator)navigator.vibrate([150,80,150])}
+function clearSessions(){if(!confirm('Clear all focus session history? This also resets your streak and focus totals.'))return;data.sessions=[];save();toast('Session history cleared.')}
+function saveSettings(){data.settings.appName=$('appNameInput').value.trim()||'FocusForge';data.settings.footer=$('footerInput').value.trim();save();toast('Appearance saved!')}
+function resetAll(){if(!confirm('This permanently clears your subjects, tasks, and focus history on this device. Continue?'))return;pauseTimer();data={subjects:[],tasks:[],sessions:[],settings:{appName:'FocusForge',footer:'Yos salun ki'}};remaining=chosenMinutes*60;save();toast('App data reset.')}
+$('taskDate').value=today();
+renderAll();updateTimerDisplay();
+</script>
+</body>
+</html>
+'''
+path = Path("/mnt/data/index.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created {path} ({path.stat().st_size:,} bytes)")
